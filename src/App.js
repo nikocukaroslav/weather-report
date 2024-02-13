@@ -8,11 +8,12 @@ function App() {
   const [icon, setIcon] = useState("");
   const [windSpeed, setWindSpeed] = useState("");
   const [humidity, setHumidity] = useState("");
+
   useEffect(
     function () {
       async function weather() {
         const res = await fetch(
-          `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=7`
+          `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=3`
         );
         const data = await res.json();
         setCity(data.location.name);
@@ -21,16 +22,17 @@ function App() {
         setTemp_c(data.current.temp_c);
         setWindSpeed(data.current.wind_mph);
         setHumidity(data.current.humidity);
-        setDay(data.forecast.forecastday[1].date);
+        setDay(data.forecast.forecastday[0].date);
         console.log(data);
       }
       weather();
     },
-    [temp_c, city]
+    [city]
   );
   return (
-    <div className="weather-box">
-      <ActiveWeatherBox
+    <div>
+      <WeatherList
+        day={day}
         city={city}
         icon={icon}
         weather={weather}
@@ -38,31 +40,13 @@ function App() {
         windSpeed={windSpeed}
         humidity={humidity}
       />
-
-      <WeatherList day={day} icon={icon} />
     </div>
   );
 }
 
-function WeatherBox({ day, icon }) {
-  return (
-    <div className="weather-list-item">
-      <h3>{day}</h3>
-      <img src={`${icon}`} alt="weather-icon" />
-    </div>
-  );
-}
-
-function WeatherList({ day, icon }) {
-  return (
-    <ul>
-      <WeatherBox day={day} icon={icon} />
-    </ul>
-  );
-}
-
-/*  setWeather(data.forecast.forecastday[0].day.condition.text);*/
-function ActiveWeatherBox({
+function WeatherList({
+  data,
+  day,
   city,
   icon,
   weather,
@@ -70,15 +54,36 @@ function ActiveWeatherBox({
   windSpeed,
   humidity,
 }) {
+  data.forecast.forecastday.map((element) => {
+    return (
+      <WeatherBox
+        day={day}
+        city={city}
+        icon={icon}
+        weather={weather}
+        temp_c={temp_c}
+        windSpeed={windSpeed}
+        humidity={humidity}
+      />
+    );
+  });
+}
+
+/*  setWeather(data.forecast.forecastday[0].day.condition.text);*/
+function WeatherBox({ day, icon, weather, temp_c, windSpeed, humidity }) {
+  const date = new Date();
+  const currentDay = date.getDate();
+  const calendarDay = day.split("-")[2];
+
+  console.log(calendarDay);
+  console.log(currentDay);
   return (
-    <main>
-      <h2>Today in {city}</h2>
+    <main className="weather-box">
+      <h2>{Number(calendarDay) === Number(currentDay) ? "Today" : day}</h2>
       <div className="weather-info">
-        <div>
-          <div className="weather-icon-container">
-            <img src={`${icon}`} alt="weather-icon" className="weather-icon" />
-            <p>{weather}</p>
-          </div>
+        <div className="weather-icon-container">
+          <img src={`${icon}`} alt="weather-icon" className="weather-icon" />
+          <p>{weather}</p>
         </div>
         <ul className="weather-info-list">
           <li>

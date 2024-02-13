@@ -15,13 +15,15 @@ body {
 }
 
 .weather-box {
-  border-radius: 50%;
   margin: 0 auto;
   margin-top: 5%;
-  padding: 3.6rem 8.4rem;
+  padding: 3.6rem;
   background-color: #f1f3f5;
-  width: 60rem;
-  height: 60rem;
+  width: 30rem;
+  height: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weather-box h2 {
@@ -32,7 +34,8 @@ body {
 
 .weather-info {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 15rem;
 }
 
 .weather-info-list {
@@ -40,19 +43,17 @@ body {
   flex-direction: column;
   gap: 1.2rem;
   list-style: none;
+  justify-self: flex-end;
 }
 
 .weather-icon {
   width: 8.4rem;
   height: 8.4rem;
-  filter: brightness(0.8);
+  filter: brightness(0.9);
 }
 
 .weather-icon-container {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-}
-
-.weather-list-item {
 }
