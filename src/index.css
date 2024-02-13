@@ -9,21 +9,38 @@ html {
 }
 
 body {
+  overflow: hidden;
+  height: 100vh;
   font-family: serif;
-  color: #333;
+  color: #e9ecef;
   font-size: 2.2rem;
+  background-image: linear-gradient(to top, #5d6778, #747f94);
+}
+
+.weather-box-container {
+  display: flex;
+  gap: 2.4rem;
+  justify-content: center;
+  margin-top: 10%;
 }
 
 .weather-box {
-  margin: 0 auto;
-  margin-top: 5%;
-  padding: 3.6rem;
-  background-color: #f1f3f5;
+  padding: 3.6rem 2.4rem;
+  background-image: linear-gradient(to top, #3a404b, #4c5461);
+  box-shadow: 0 5px 10px 10px rgba(0, 0, 0, 0.05);
+  opacity: 80%;
   width: 30rem;
   height: 50rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 9px;
+  transition: all 0.4s;
+}
+
+.weather-box:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 10px 15px 12px rgba(0, 0, 0, 0.1);
 }
 
 .weather-box h2 {
@@ -35,25 +52,54 @@ body {
 .weather-info {
   display: flex;
   flex-direction: column;
-  gap: 15rem;
+  gap: 13rem;
 }
 
 .weather-info-list {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  list-style: none;
-  justify-self: flex-end;
+  border-top: 3px solid #e9ecef;
+  padding-top: 2.8rem;
 }
 
 .weather-icon {
   width: 8.4rem;
   height: 8.4rem;
-  filter: brightness(0.9);
 }
 
 .weather-icon-container {
+  font-size: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.8rem;
+}
+
+.big-temperature {
+  letter-spacing: 2px;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.temperature-box-container {
+  font-size: 2.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  row-gap: 3.6rem;
+}
+
+.temperature-box {
+  display: flex;
+  gap: 0.4rem;
+  align-content: center;
+}
+
+svg {
+  width: 28px;
+  height: 28px;
+}
+
+.margin-left {
+  margin-left: 2.4rem;
 }
