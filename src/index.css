@@ -10,15 +10,19 @@ html {
 
 body {
   overflow: hidden;
+  width: 100rem;
   height: 100vh;
   font-family: serif;
   color: #e9ecef;
   font-size: 2.2rem;
   background-image: linear-gradient(to top, #5d6778, #747f94);
+  margin: 0 auto;
 }
 
 .weather-box-container {
-  display: flex;
+  padding: 2.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2.4rem;
   justify-content: center;
   margin-top: 10%;
@@ -63,6 +67,10 @@ body {
   gap: 1.2rem;
   border-top: 3px solid #e9ecef;
   padding-top: 2.8rem;
+}
+
+.day-time {
+  letter-spacing: 1.2px;
 }
 
 .weather-icon {
@@ -111,4 +119,50 @@ svg {
 
 .margin-left {
   margin-left: 2.4rem;
+}
+
+.button {
+  opacity: 80%;
+  color: #e9ecef;
+  background-color: #434a57;
+  font-weight: 550;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.8rem;
+  width: 12rem;
+  height: 4rem;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: #4c5461;
+}
+
+.navigation {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.choose-city-input {
+  border: none;
+  background-color: #dee2e6;
+  padding: 0 0.8rem;
+  font-size: 1.8rem;
+  border-radius: 6px;
+  width: 18rem;
+  height: 4rem;
+}
+
+.choose-city-input:focus {
+  border: 0.5px #434a57;
+}
+.choose-city {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  color: #495057;
+  font-weight: 600;
+  margin-left: auto;
 }

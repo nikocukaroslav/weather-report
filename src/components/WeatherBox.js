@@ -23,7 +23,7 @@ export function WeatherBox({
 
   return (
     <main className="weather-box" onClick={HandleActive}>
-      <h2>
+      <h2 className="day-time">
         {Number(calendarDay) === Number(currentDay) && "Today"}
         {Number(calendarDay) === Number(currentDay) + 1 && "Tomorrow"}
         {Number(calendarDay) !== Number(currentDay) &&
@@ -47,8 +47,6 @@ export function WeatherBox({
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   fill="currentColor"
                   viewBox="0 0 16 16"
                 >
@@ -62,8 +60,6 @@ export function WeatherBox({
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   fill="currentColor"
                   viewBox="0 0 16 16"
                 >
@@ -78,8 +74,6 @@ export function WeatherBox({
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   fill="currentColor"
                   viewBox="0 0 16 16"
                 >
@@ -92,8 +86,6 @@ export function WeatherBox({
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   fill="currentColor"
                   viewBox="0 0 16 16"
                 >
