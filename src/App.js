@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
+import { WeatherList } from "./WeatherList";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState("");
   const [city, setCity] = useState("Житомир");
+  const [active, setActive] = useState(true);
+
+  function HandleActive(id) {
+    setActive((id) => !active);
+  }
+
   useEffect(
     function () {
       async function weather() {
@@ -12,6 +19,7 @@ function App() {
         const data = await res.json();
         setCity(data.location.name);
         setForecastInfo(data.forecast);
+        console.log(data.forecast.forecastday);
         console.log(data);
       }
       weather();
@@ -21,107 +29,91 @@ function App() {
 
   return (
     <div className="weather-box-container">
-      <WeatherList forecastInfo={forecastInfo} />
+      {!active && (
+        <CurrentDayInfoList
+          forecastInfo={forecastInfo}
+          HandleActive={HandleActive}
+        />
+      )}
+      {active && (
+        <WeatherList forecastInfo={forecastInfo} HandleActive={HandleActive} />
+      )}
     </div>
   );
 }
 
-function WeatherList({ forecastInfo }) {
+function CurrentDayInfoList({ forecastInfo, HandleActive }) {
+  const times = [8, 14, 20];
   return forecastInfo && forecastInfo.forecastday
-    ? forecastInfo.forecastday.map((_, index) => {
-        return (
-          <WeatherBox
-            key={index}
-            day={forecastInfo.forecastday[index].date}
-            icon={forecastInfo.forecastday[index].day.condition.icon}
-            weather={forecastInfo.forecastday[index].day.condition.text}
-            maxTemp_c={forecastInfo.forecastday[index].day.maxtemp_c}
-            minTemp_c={forecastInfo.forecastday[index].day.mintemp_c}
-            avgTemp_c={forecastInfo.forecastday[index].day.avgtemp_c}
-            windSpeed={forecastInfo.forecastday[index].day.maxwind_kph}
-            humidity={forecastInfo.forecastday[index].day.avghumidity}
-          />
-        );
+    ? forecastInfo.forecastday.map((day, index) => {
+        return times.map((time, timeIndex) => {
+          return (
+            <CurrentDayInfo
+              key={index * 10 + timeIndex}
+              dayTime={
+                time === 8
+                  ? "Morning(8pm)"
+                  : time === 14
+                  ? "Day(14am)"
+                  : "Evening(20am)"
+              }
+              icon={day.hour[time].condition.icon}
+              weather={day.hour[time].condition.text}
+              avgTemp_c={day.hour[time].temp_c}
+              windSpeed={day.hour[time].wind_kph}
+              humidity={day.hour[time].humidity}
+              feelLike={day.hour[time].feelslike_c}
+              HandleActive={HandleActive}
+            />
+          );
+        });
       })
     : null;
 }
 
-function WeatherBox({
-  day,
+function CurrentDayInfo({
+  dayTime,
   icon,
   weather,
-  maxTemp_c,
-  minTemp_c,
   avgTemp_c,
   windSpeed,
   humidity,
+  HandleActive,
+  feelLike,
 }) {
-  const date = new Date();
-  const currentDay = date.getDate();
-  const calendarDay = day.split("-")[2];
-
-  function GetDay(int) {
-    let weekDay = new Date(
-      date.setTime(date.getTime() + Number(int) * 86400000)
-    );
-    weekDay = String(weekDay).split(" ")[0];
-    return weekDay;
-  }
-
   return (
-    <main className="weather-box">
-      <h2>
-        {Number(calendarDay) === Number(currentDay) && "Today"}
-        {Number(calendarDay) === Number(currentDay) + 1 && "Tomorrow"}
-        {Number(calendarDay) !== Number(currentDay) &&
-          Number(calendarDay) !== Number(currentDay) + 1 &&
-          GetDay(2)}
-      </h2>
-      <div className="weather-info">
+    <main className="weather-box" onClick={HandleActive}>
+      <h2>{dayTime}</h2>
+      <section className="weather-info">
         <div className="weather-icon-container">
           <img src={icon} alt="weather-icon" className="weather-icon" />
 
-          <p>
+          <div>
             <span className="big-temperature">
               {avgTemp_c}°C <br />
             </span>
             {weather}
-          </p>
+          </div>
         </div>
         <div className="weather-info-list">
-          <div className="temperature-box-container">
+          <div className="temperature-box-container-for-current-day">
             <div className="temperature-box">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="16"
+                  height="16"
                   fill="currentColor"
+                  class="bi bi-thermometer-half"
                   viewBox="0 0 16 16"
                 >
-                  <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585a1.5 1.5 0 0 1 1 1.415" />
+                  <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V6.5a.5.5 0 0 1 1 0v4.585a1.5 1.5 0 0 1 1 1.415" />
                   <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1" />
                 </svg>
               </span>
-              <span>{minTemp_c}°C</span>
+              <span>Feels like: {feelLike} °C</span>
             </div>
-            <div className="temperature-box margin-left">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V2.5a.5.5 0 0 1 1 0v8.585a1.5 1.5 0 0 1 1 1.415" />
-                  <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1" />
-                </svg>
-              </span>
-              <span>{maxTemp_c}°C</span>
-            </div>
-
-            <div className="temperature-box">
+            <div className="temperature-box ">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -133,9 +125,9 @@ function WeatherBox({
                   <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5" />
                 </svg>
               </span>
-              <span>{windSpeed} mph</span>
+              <span>Speed: {windSpeed} mph</span>
             </div>
-            <div className="temperature-box margin-left">
+            <div className="temperature-box ">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,11 +146,11 @@ function WeatherBox({
                   />
                 </svg>
               </span>
-              <span>{humidity}%</span>
+              <span>Humidity: {humidity}%</span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
