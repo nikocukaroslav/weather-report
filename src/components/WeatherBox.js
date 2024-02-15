@@ -7,7 +7,6 @@ export function WeatherBox({
   avgTemp_c,
   windSpeed,
   humidity,
-  HandleActive,
 }) {
   const date = new Date();
   const currentDay = date.getDate();
@@ -22,7 +21,7 @@ export function WeatherBox({
   }
 
   return (
-    <main className="weather-box" onClick={HandleActive}>
+    <main className="weather-box">
       <h2 className="day-time">
         {Number(calendarDay) === Number(currentDay) && "Today"}
         {Number(calendarDay) === Number(currentDay) + 1 && "Tomorrow"}

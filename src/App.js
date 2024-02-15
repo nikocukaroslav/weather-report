@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { WeatherList } from "./components/WeatherList";
 import { CurrentDayInfoList } from "./components/CurrentDayInfoList";
+import { BackButton } from "./components/BackButton";
+import { Input } from "./components/Input";
+import { Loading } from "./components/Loading";
+import { Error } from "./components/Error";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState("");
   const [city, setCity] = useState("Житомир");
-  const [active, setActive] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const debounceRef = useRef(null);
-
-  function HandleActive() {
-    setActive(!active);
-  }
 
   useEffect(
     function () {
@@ -62,51 +62,23 @@ function App() {
   return (
     <div className="weather-box-container">
       <div className="navigation">
-        {error ? <Error error={error} /> : <WeatherList />}
-        {loading && !error ? <Loading /> : <WeatherList />}
-        {!active && <BackButton HandleActive={HandleActive} />}
-        {active && <Input setCity={setCity} city={city} />}
+        {error ? <Error error={error} /> : null}
+        {loading && !error ? <Loading /> : null}
+        {activeIndex !== null && <BackButton setActiveIndex={setActiveIndex} />}
+        {activeIndex === null && <Input setCity={setCity} city={city} />}
       </div>
-      {!active && (
+      {activeIndex === null ? (
+        <WeatherList
+          forecastInfo={forecastInfo}
+          setActiveIndex={setActiveIndex}
+        />
+      ) : (
         <CurrentDayInfoList
           forecastInfo={forecastInfo}
-          HandleActive={HandleActive}
+          activeIndex={activeIndex}
         />
       )}
-      {active && !loading && (
-        <WeatherList forecastInfo={forecastInfo} HandleActive={HandleActive} />
-      )}
     </div>
-  );
-}
-
-function Loading() {
-  return <span className="loading">Loading...</span>;
-}
-function Error({ error }) {
-  return <span className="loading">{error}</span>;
-}
-
-function Input({ setCity, city }) {
-  return (
-    <div className="choose-city">
-      <label>Choose your city</label>
-      <input
-        type="text"
-        className="choose-city-input"
-        value={city}
-        placeholder="New York"
-        onChange={(e) => setCity(e.target.value)}
-      />
-    </div>
-  );
-}
-
-function BackButton({ HandleActive }) {
-  return (
-    <button className="button" onClick={HandleActive}>
-      &larr; Back
-    </button>
   );
 }
 export default App;
