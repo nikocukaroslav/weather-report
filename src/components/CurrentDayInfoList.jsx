@@ -11,8 +11,8 @@ export function CurrentDayInfoList({ forecastInfo, activeIndex }) {
           time === 8
             ? "Morning(8pm)"
             : time === 14
-            ? "Day(14am)"
-            : "Evening(20am)"
+            ? "Day(2am)"
+            : "Evening(8am)"
         }
         icon={forecastInfo.forecastday[activeIndex].hour[time].condition.icon}
         weather={

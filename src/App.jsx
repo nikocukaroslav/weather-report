@@ -12,8 +12,16 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeIndex, setActiveIndex] = useState(null);
-
+  const [daysCount, setDaysCount] = useState([3]);
   const debounceRef = useRef(null);
+
+  function HandleDaysCountPlus(day) {
+    setDaysCount(() => daysCount + 1);
+  }
+
+  function HandleDaysCountMinus(day) {
+    setDaysCount(() => daysCount - 1);
+  }
 
   useEffect(
     function () {
@@ -22,12 +30,12 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=3`,
+            `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=${daysCount}`,
             { signal: controller.signal }
           );
           const data = await res.json();
           setForecastInfo(data.forecast);
-          console.log(data.location.name);
+          console.log(data);
         } catch (err) {
           if (err.name === "AbortError") setLoading(true);
           if (err.name === "TypeError") {
@@ -56,11 +64,17 @@ function App() {
         controller.abort();
       };
     },
-    [city]
+    [city, daysCount]
   );
 
   return (
     <div className="weather-box-container">
+      {activeIndex === null && (
+        <ScrolleButtons
+          HandleDaysCountPlus={HandleDaysCountPlus}
+          HandleDaysCountMinus={HandleDaysCountMinus}
+        />
+      )}
       <div className="navigation">
         {error ? <Error error={error} /> : null}
         {loading && !error ? <Loading /> : null}
@@ -78,6 +92,37 @@ function App() {
           activeIndex={activeIndex}
         />
       )}
+    </div>
+  );
+}
+
+function ScrolleButtons({ HandleDaysCountPlus, HandleDaysCountMinus }) {
+  return (
+    <div className="scrolle-buttons">
+      <span style={{ paddingRight: "0.4rem" }} onClick={HandleDaysCountMinus}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fillRule="evenodd"
+            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+          />
+        </svg>
+      </span>
+      <span style={{ paddingLeft: "0.4rem" }} onClick={HandleDaysCountPlus}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fillRule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+          />
+        </svg>
+      </span>
     </div>
   );
 }

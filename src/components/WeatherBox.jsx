@@ -17,8 +17,15 @@ export function WeatherBox({
       date.setTime(date.getTime() + Number(int) * 86400000)
     );
     weekDay = String(weekDay).split(" ")[0];
-    return weekDay;
+    if (weekDay === "Sat") return "Saturday";
+    if (weekDay === "Sun") return "Sunday";
+    if (weekDay === "Mor") return "Morning";
+    if (weekDay === "Tue") return "Tuesday";
+    if (weekDay === "Wed") return "Wednesday";
+    if (weekDay === "Thu") return "Thursday";
+    if (weekDay === "Fri") return "Friday";
   }
+  console.log(weather);
 
   return (
     <main className="weather-box">
