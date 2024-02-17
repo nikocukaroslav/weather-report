@@ -5,22 +5,31 @@ import { BackButton } from "./components/BackButton";
 import { Input } from "./components/Input";
 import { Loading } from "./components/Loading";
 import { Error } from "./components/Error";
+import { ScrolleButtons } from "./components/ScrolleButtons";
 
 function App() {
-  const [forecastInfo, setForecastInfo] = useState("");
+  const [forecastInfo, setForecastInfo] = useState(null);
   const [city, setCity] = useState("Житомир");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeIndex, setActiveIndex] = useState(null);
-  const [daysCount, setDaysCount] = useState([3]);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(3);
+
   const debounceRef = useRef(null);
 
-  function HandleDaysCountPlus(day) {
-    setDaysCount(() => daysCount + 1);
+  function HandleDaysCountPlus() {
+    if (end < 8) {
+      setStart((s) => s + 1);
+      setEnd((e) => e + 1);
+    }
   }
 
-  function HandleDaysCountMinus(day) {
-    setDaysCount(() => daysCount - 1);
+  function HandleDaysCountMinus() {
+    if (start > 0) {
+      setStart((s) => s - 1);
+      setEnd((e) => e - 1);
+    }
   }
 
   useEffect(
@@ -30,18 +39,16 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=${daysCount}`,
+            `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
           const data = await res.json();
           setForecastInfo(data.forecast);
-          console.log(data);
         } catch (err) {
           if (err.name === "AbortError") setLoading(true);
           if (err.name === "TypeError") {
             setError("We can't find that city...");
           } else setLoading(true);
-          console.log(err.name);
         } finally {
           setLoading(false);
         }
@@ -64,13 +71,14 @@ function App() {
         controller.abort();
       };
     },
-    [city, daysCount]
+    [city]
   );
 
   return (
     <div className="weather-box-container">
       {activeIndex === null && (
         <ScrolleButtons
+          end={end}
           HandleDaysCountPlus={HandleDaysCountPlus}
           HandleDaysCountMinus={HandleDaysCountMinus}
         />
@@ -83,6 +91,8 @@ function App() {
       </div>
       {activeIndex === null ? (
         <WeatherList
+          start={start}
+          end={end}
           forecastInfo={forecastInfo}
           setActiveIndex={setActiveIndex}
         />
@@ -96,34 +106,4 @@ function App() {
   );
 }
 
-function ScrolleButtons({ HandleDaysCountPlus, HandleDaysCountMinus }) {
-  return (
-    <div className="scrolle-buttons">
-      <span style={{ paddingRight: "0.4rem" }} onClick={HandleDaysCountMinus}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fillRule="evenodd"
-            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-          />
-        </svg>
-      </span>
-      <span style={{ paddingLeft: "0.4rem" }} onClick={HandleDaysCountPlus}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-          />
-        </svg>
-      </span>
-    </div>
-  );
-}
 export default App;

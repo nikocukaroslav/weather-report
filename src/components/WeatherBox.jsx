@@ -9,8 +9,8 @@ export function WeatherBox({
   humidity,
 }) {
   const date = new Date();
-  const currentDay = date.getDate();
-  const calendarDay = day.split("-")[2];
+  const currentDay = Number(date.getDate());
+  const calendarDay = Number(day.split("-")[2]);
 
   function GetDay(int) {
     let weekDay = new Date(
@@ -19,22 +19,33 @@ export function WeatherBox({
     weekDay = String(weekDay).split(" ")[0];
     if (weekDay === "Sat") return "Saturday";
     if (weekDay === "Sun") return "Sunday";
-    if (weekDay === "Mor") return "Morning";
+    if (weekDay === "Mon") return "Monday";
     if (weekDay === "Tue") return "Tuesday";
     if (weekDay === "Wed") return "Wednesday";
     if (weekDay === "Thu") return "Thursday";
     if (weekDay === "Fri") return "Friday";
   }
-  console.log(weather);
-
+  console.log(calendarDay);
   return (
     <main className="weather-box">
       <h2 className="day-time">
-        {Number(calendarDay) === Number(currentDay) && "Today"}
-        {Number(calendarDay) === Number(currentDay) + 1 && "Tomorrow"}
-        {Number(calendarDay) !== Number(currentDay) &&
-          Number(calendarDay) !== Number(currentDay) + 1 &&
-          GetDay(2)}
+        {currentDay === calendarDay
+          ? "Today"
+          : calendarDay === currentDay + 1
+          ? "Tomorrow"
+          : calendarDay === currentDay + 2
+          ? GetDay(2)
+          : calendarDay === currentDay + 3
+          ? GetDay(3)
+          : calendarDay === currentDay + 4
+          ? GetDay(4)
+          : calendarDay === currentDay + 5
+          ? GetDay(5)
+          : calendarDay === currentDay + 6
+          ? GetDay(6)
+          : calendarDay === currentDay + 7
+          ? GetDay(7)
+          : null}
       </h2>
       <section className="weather-info">
         <div className="weather-icon-container">

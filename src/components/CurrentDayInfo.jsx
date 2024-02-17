@@ -13,7 +13,6 @@ export function CurrentDayInfo({
       <section className="weather-info">
         <div className="weather-icon-container">
           <img src={icon} alt="weather-icon" className="weather-icon" />
-
           <div>
             <span className="big-temperature">
               {avgTemp_c}°C <br />

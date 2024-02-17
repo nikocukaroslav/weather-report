@@ -1,20 +1,20 @@
 import { WeatherBox } from "./WeatherBox";
 
-export function WeatherList({ forecastInfo, setActiveIndex }) {
+export function WeatherList({ forecastInfo, setActiveIndex, start, end }) {
   return forecastInfo && forecastInfo.forecastday
-    ? forecastInfo.forecastday.map((_, index) => {
+    ? forecastInfo.forecastday.slice(start, end).map((day, index) => {
         return (
-          <div key={index} onClick={() => setActiveIndex(index)}>
+          <div key={index} onClick={() => setActiveIndex(index + start)}>
             <WeatherBox
               key={index}
-              day={forecastInfo.forecastday[index].date}
-              icon={forecastInfo.forecastday[index].day.condition.icon}
-              weather={forecastInfo.forecastday[index].day.condition.text}
-              maxTemp_c={forecastInfo.forecastday[index].day.maxtemp_c}
-              minTemp_c={forecastInfo.forecastday[index].day.mintemp_c}
-              avgTemp_c={forecastInfo.forecastday[index].day.avgtemp_c}
-              windSpeed={forecastInfo.forecastday[index].day.maxwind_kph}
-              humidity={forecastInfo.forecastday[index].day.avghumidity}
+              day={day.date}
+              icon={day.day.condition.icon}
+              weather={day.day.condition.text}
+              maxTemp_c={day.day.maxtemp_c}
+              minTemp_c={day.day.mintemp_c}
+              avgTemp_c={day.day.avgtemp_c}
+              windSpeed={day.day.maxwind_kph}
+              humidity={day.day.avghumidity}
             />
           </div>
         );
