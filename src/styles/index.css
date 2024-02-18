@@ -20,7 +20,7 @@ html {
 
 body {
   overflow: hidden;
-  width: 100rem;
+  width: 100vw;
   height: 100vh;
   font-family: serif;
   color: var(--text-color);
@@ -260,10 +260,6 @@ svg {
 }
 
 @media screen and (max-width: 577px) {
-  html {
-    font-size: 25%;
-  }
-
   .scrolle-buttons {
     display: none;
   }
