@@ -6,6 +6,7 @@ import { Input } from "./components/Input";
 import { Loading } from "./components/Loading";
 import { Error } from "./components/Error";
 import { ScrolleButtons } from "./components/ScrolleButtons";
+import { useSwipeable } from "react-swipeable";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState(null);
@@ -71,8 +72,13 @@ function App() {
     [city]
   );
 
+  const handlers = useSwipeable({
+    onSwipedUp: HandleDaysCountPlus,
+    onSwipedDown: HandleDaysCountMinus,
+  });
+
   return (
-    <div className="weather-box-container">
+    <div className="weather-box-container" {...handlers}>
       <div className="navigation">
         {error ? <Error error={error} /> : null}
         {loading && !error ? <Loading /> : null}
@@ -87,8 +93,6 @@ function App() {
           end={end}
           forecastInfo={forecastInfo}
           setActiveIndex={setActiveIndex}
-          HandleDaysCountPlus={HandleDaysCountPlus}
-          HandleDaysCountMinus={HandleDaysCountMinus}
         />
       ) : (
         <CurrentDayInfoList

@@ -1,27 +1,10 @@
 import { WeatherBox } from "./WeatherBox";
-import { useSwipeable } from "react-swipeable";
 
-export function WeatherList({
-  forecastInfo,
-  setActiveIndex,
-  start,
-  end,
-  HandleDaysCountPlus,
-  HandleDaysCountMinus,
-}) {
-  const handlers = useSwipeable({
-    onSwipedUp: HandleDaysCountMinus,
-    onSwipedDown: HandleDaysCountPlus,
-  });
-  console.log(HandleDaysCountPlus);
+export function WeatherList({ forecastInfo, setActiveIndex, start, end }) {
   return forecastInfo && forecastInfo.forecastday
     ? forecastInfo.forecastday.slice(start, end).map((day, index) => {
         return (
-          <div
-            {...handlers}
-            key={index}
-            onClick={() => setActiveIndex(index + start)}
-          >
+          <div key={index} onClick={() => setActiveIndex(index + start)}>
             <WeatherBox
               key={index}
               day={day.date}
