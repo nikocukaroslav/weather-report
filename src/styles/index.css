@@ -20,7 +20,7 @@ html {
 
 body {
   overflow: hidden;
-  width: 100vw;
+  width: 100rem;
   height: 100vh;
   font-family: serif;
   color: var(--text-color);
@@ -39,6 +39,7 @@ body {
   gap: 2.4rem;
   justify-content: center;
   position: relative;
+  margin-top: -8.4rem;
 }
 
 .placeholder {
@@ -255,11 +256,15 @@ svg {
 
 @media screen and (max-width: 727px) {
   html {
-    font-size: 29.5%;
+    font-size: 32.5%;
   }
 }
 
 @media screen and (max-width: 577px) {
+  body {
+    width: 100vw;
+  }
+
   .scrolle-buttons {
     display: none;
   }
@@ -274,13 +279,14 @@ svg {
   }
 
   .button {
-    font-size: 1.6rem;
+    font-size: 2.8rem;
     width: 18rem;
     height: 6rem;
     transition: all 0.3s;
   }
 
   .choose-city-input {
+    font-size: 3.2rem;
     width: 22rem;
     height: 5rem;
   }
@@ -325,10 +331,13 @@ svg {
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 440px) {
   html {
-    font-size: 24%;
+    font-size: 27%;
   }
+}
+
+@media screen and (max-width: 380px) {
   .padding-right {
     width: 120%;
   }
