@@ -9,10 +9,10 @@ export function CurrentDayInfoList({ forecastInfo, activeIndex }) {
         key={time}
         dayTime={
           time === 8
-            ? "Morning(8pm)"
+            ? "Morning (8pm)"
             : time === 14
-            ? "Day(2am)"
-            : "Evening(8am)"
+            ? "Day (2am)"
+            : "Evening (8am)"
         }
         icon={forecastInfo.forecastday[activeIndex].hour[time].condition.icon}
         weather={

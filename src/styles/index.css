@@ -281,8 +281,7 @@ svg {
   .button {
     font-size: 3.6rem;
     width: 22rem;
-    height: 7rem;
-    transition: all 0.3s;
+    height: 8rem;
   }
 
   .choose-city-input {
@@ -302,7 +301,7 @@ svg {
   }
 
   .margin-left {
-    margin-left: unset;
+    margin-left: 0.8rem;
   }
 
   .weather-box {
@@ -352,6 +351,11 @@ svg {
   html {
     font-size: 27%;
   }
+
+  .button {
+    font-size: 3.8rem;
+  }
+
   .temperature-box-container {
     column-gap: 1.2rem;
   }
