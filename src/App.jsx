@@ -43,6 +43,7 @@ function App() {
             { signal: controller.signal }
           );
           const data = await res.json();
+          console.log(data.forecast);
           setForecastInfo(data.forecast);
         } catch (err) {
           if (err.name === "AbortError") setLoading(true);
@@ -69,7 +70,6 @@ function App() {
     },
     [city]
   );
-
   return (
     <div className="weather-box-container">
       {activeIndex === null && !loading && !error && (
