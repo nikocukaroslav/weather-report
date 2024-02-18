@@ -6,7 +6,10 @@ export function ScrolleButtons({
   return (
     <div className="scrolle-buttons">
       {end !== 3 && (
-        <span style={{ paddingRight: "0.4rem" }} onClick={HandleDaysCountMinus}>
+        <button
+          style={{ paddingRight: "0.4rem" }}
+          onClick={HandleDaysCountMinus}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -17,10 +20,10 @@ export function ScrolleButtons({
               d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
             />
           </svg>
-        </span>
+        </button>
       )}
       {end !== 8 && (
-        <span
+        <button
           style={{ paddingLeft: "0.4rem" }}
           onClick={HandleDaysCountPlus}
           className="scroll-button-plus"
@@ -35,7 +38,7 @@ export function ScrolleButtons({
               d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
             />
           </svg>
-        </span>
+        </button>
       )}
     </div>
   );

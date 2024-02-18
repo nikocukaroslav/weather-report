@@ -27,18 +27,7 @@ export function WeatherBox({
   }
   /* console.log(weather);*/
   return (
-    <main
-      className={
-        weather.includes("Cloudy") ||
-        weather.includes("Overcast") ||
-        weather.includes("rain") ||
-        weather.includes("snow")
-          ? "weather-box for-cloudy"
-          : weather.includes("Clear")
-          ? "weather-box "
-          : "weather-box for-sunny"
-      }
-    >
+    <main className="weather-box">
       <h2 className="day-time">
         {currentDay === calendarDay
           ? "Today"

@@ -8,18 +8,7 @@ export function CurrentDayInfo({
   feelLike,
 }) {
   return (
-    <main
-      className={
-        weather.includes("Cloudy") ||
-        weather.includes("Overcast") ||
-        weather.includes("rain") ||
-        weather.includes("snow")
-          ? "weather-box for-cloudy"
-          : weather.includes("Clear")
-          ? "weather-box "
-          : "weather-box for-sunny"
-      }
-    >
+    <main className="weather-box">
       <h2 className="day-time">{dayTime}</h2>
       <div className="weather-info">
         <div className="weather-icon-container">

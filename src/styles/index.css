@@ -230,7 +230,8 @@ svg {
   opacity: 70%;
 }
 
-.scrolle-buttons span {
+.scrolle-buttons button {
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,28 +243,12 @@ svg {
   transition: all 0.3s;
 }
 
-.scrolle-buttons span:hover {
+.scrolle-buttons button:hover {
   background-color: var(--third-color);
 }
 
 .scroll-button-plus {
   margin-left: auto;
-}
-
-.for-cloudy {
-  background-image: linear-gradient(
-    to top,
-    var(--gradient-box-1),
-    var(--gradient-box-2)
-  );
-}
-
-.for-sunny {
-  background-image: linear-gradient(
-    to top,
-    var(--gradient-box-1),
-    var(--gradient-box-2)
-  );
 }
 
 @media screen and (max-width: 1268px) {
