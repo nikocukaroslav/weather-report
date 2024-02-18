@@ -1,12 +1,17 @@
 /*colors
-text-color:#e9ecef;
-body-gradient:#5d6778,#747f94;
-box-gradient:#3a404b,#4c5461;
+text-color:#e9ecef,#e3fafc;
+body-gradient:#5d6778,#747f94;#1398aa, #22b8cf;
+box-gradient:#3a404b,#4c5461;#095d6c, #0b879a;
 */
 :root {
-  --main-color: #0b879a;
-  --second-color: #095d6c;
-  --text-color: #e3fafc;
+  --main-color: #7048e8;
+  --second-color: #6741d9;
+  --third-color: #d0bfff;
+  --text-color: #e5dbff;
+  --gradient-body-1: #9775fa;
+  --gradient-body-2: #b197fc;
+  --gradient-box-1: #5f3dc4;
+  --gradient-box-2: #7048e8;
 }
 * {
   margin: 0;
@@ -25,11 +30,29 @@ body {
   font-family: serif;
   color: var(--text-color);
   font-size: 2.2rem;
-  background-image: linear-gradient(to top, #1398aa, #22b8cf);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("img/clouds.jpg"),
+    linear-gradient(to top, var(--gradient-body-1), var(--gradient-body-2));
+  background-blend-mode: multiply;
+  background-size: cover;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/clouds.jpg"),
+    linear-gradient(to top, var(--gradient-body-1), var(--gradient-body-2));
+  background-blend-mode: multiply;
+  background-size: cover;
+  filter: blur(5px);
+  z-index: -1;
 }
 
 .weather-box-container {
@@ -49,9 +72,13 @@ body {
 
 .weather-box {
   padding: 4.4rem 2.4rem;
-  background-image: linear-gradient(to top, #095d6c, #0b879a);
+  background-image: linear-gradient(
+    to top,
+    var(--gradient-box-1),
+    var(--gradient-box-2)
+  );
   box-shadow: 0 5px 10px 10px rgba(0, 0, 0, 0.05);
-  opacity: 80%;
+  opacity: 70%;
   width: 30rem;
   height: 50rem;
   display: flex;
@@ -140,7 +167,7 @@ svg {
 }
 
 .button {
-  opacity: 80%;
+  opacity: 70%;
   color: var(--text-color);
   background-color: var(--main-color);
   font-weight: 550;
@@ -200,7 +227,7 @@ svg {
   width: 110%;
   top: 51%;
   font-size: 3.6rem;
-  opacity: 80%;
+  opacity: 70%;
 }
 
 .scrolle-buttons span {
@@ -210,13 +237,13 @@ svg {
   width: 4.8rem;
   height: 4.8rem;
   background-color: var(--text-color);
-  color: #0b879a;
+  color: var(--main-color);
   border-radius: 50%;
   transition: all 0.3s;
 }
 
 .scrolle-buttons span:hover {
-  background-color: #bae1e3;
+  background-color: var(--third-color);
 }
 
 .scroll-button-plus {
@@ -224,13 +251,19 @@ svg {
 }
 
 .for-cloudy {
-  background-image: linear-gradient(to top, #095d6c, #5d6778);
+  background-image: linear-gradient(
+    to top,
+    var(--gradient-box-1),
+    var(--gradient-box-2)
+  );
 }
 
 .for-sunny {
-}
-
-.for-rainy {
+  background-image: linear-gradient(
+    to top,
+    var(--gradient-box-1),
+    var(--gradient-box-2)
+  );
 }
 
 @media screen and (max-width: 1268px) {
@@ -261,6 +294,22 @@ svg {
 }
 
 @media screen and (max-width: 577px) {
+  .for-cloudy {
+    background-image: linear-gradient(
+      to top right,
+      var(--gradient-box-1),
+      var(--gradient-box-2)
+    );
+  }
+
+  .for-sunny {
+    background-image: linear-gradient(
+      to top right,
+      var(--gradient-box-1),
+      var(--gradient-box-2)
+    );
+  }
+
   body {
     width: 100vw;
   }
