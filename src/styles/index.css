@@ -341,5 +341,6 @@ svg {
   }
   .temperature-box-container-for-current-day {
     row-gap: 1.2rem;
+    width: 105%;
   }
 }
