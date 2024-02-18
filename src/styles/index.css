@@ -292,7 +292,7 @@ svg {
 
   .weather-box-container {
     grid-template-columns: unset;
-    margin-top: -15rem;
+    margin-top: -18rem;
   }
 
   .weather-box:hover {
