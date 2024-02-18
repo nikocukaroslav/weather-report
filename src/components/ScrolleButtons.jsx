@@ -1,16 +1,10 @@
-import { useSwipeable } from "react-swipeable";
-
 export function ScrolleButtons({
   HandleDaysCountPlus,
   HandleDaysCountMinus,
   end,
 }) {
-  const handlers = useSwipeable({
-    onSwipedLeft: HandleDaysCountPlus,
-    onSwipedRight: HandleDaysCountMinus,
-  });
   return (
-    <div className="scrolle-buttons" {...handlers}>
+    <div className="scrolle-buttons">
       {end !== 3 && (
         <span style={{ paddingRight: "0.4rem" }} onClick={HandleDaysCountMinus}>
           <svg

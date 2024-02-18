@@ -7,8 +7,17 @@ export function Input({ setCity, city }) {
         className="choose-city-input"
         value={city}
         placeholder="New York"
+        list="city"
         onChange={(e) => setCity(e.target.value)}
       />
+      <datalist id="city">
+        <option value="Kyiv" />
+        <option value="Zhitomir" />
+        <option value="Poltava" />
+        <option value="Lviv" />
+        <option value="Odessa" />
+        <option value="Kharkiv" />
+      </datalist>
     </div>
   );
 }

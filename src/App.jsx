@@ -6,6 +6,7 @@ import { Input } from "./components/Input";
 import { Loading } from "./components/Loading";
 import { Error } from "./components/Error";
 import { ScrolleButtons } from "./components/ScrolleButtons";
+import { useSwipeable } from "react-swipeable";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState(null);
@@ -42,14 +43,14 @@ function App() {
             `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
+          if (!res.ok) {
+            setError("Can't find that city");
+          }
           const data = await res.json();
           console.log(data.forecast);
           setForecastInfo(data.forecast);
         } catch (err) {
-          if (err.name === "AbortError");
-          if (err.name === "TypeError") {
-            setError("Can't find that city");
-          } else setLoading(true);
+          if (err.name !== "AbortError") setError(err.message);
         } finally {
           setLoading(false);
         }
@@ -71,15 +72,13 @@ function App() {
     [city]
   );
 
+  const handlers = useSwipeable({
+    onSwipedLeft: HandleDaysCountPlus,
+    onSwipedRight: HandleDaysCountMinus,
+  });
+
   return (
-    <div className="weather-box-container">
-      {activeIndex === null && !loading && !error && (
-        <ScrolleButtons
-          end={end}
-          HandleDaysCountPlus={HandleDaysCountPlus}
-          HandleDaysCountMinus={HandleDaysCountMinus}
-        />
-      )}
+    <div className="weather-box-container" {...handlers}>
       <div className="navigation">
         {error ? <Error error={error} /> : null}
         {loading && !error ? <Loading /> : null}
@@ -99,6 +98,13 @@ function App() {
         <CurrentDayInfoList
           forecastInfo={forecastInfo}
           activeIndex={activeIndex}
+        />
+      )}
+      {activeIndex === null && !loading && !error && forecastInfo && (
+        <ScrolleButtons
+          end={end}
+          HandleDaysCountPlus={HandleDaysCountPlus}
+          HandleDaysCountMinus={HandleDaysCountMinus}
         />
       )}
     </div>
