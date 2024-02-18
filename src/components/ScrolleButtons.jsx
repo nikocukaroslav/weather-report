@@ -2,11 +2,16 @@ export function ScrolleButtons({
   HandleDaysCountPlus,
   HandleDaysCountMinus,
   end,
+  handlers,
 }) {
   return (
     <div className="scrolle-buttons">
       {end !== 3 && (
-        <span style={{ paddingRight: "0.4rem" }} onClick={HandleDaysCountMinus}>
+        <span
+          style={{ paddingRight: "0.4rem" }}
+          onClick={HandleDaysCountMinus}
+          {...handlers}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"

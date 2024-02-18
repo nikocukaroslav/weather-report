@@ -224,6 +224,7 @@ svg {
 }
 
 .for-cloudy {
+  background-image: linear-gradient(to top, #095d6c, #5d6778);
 }
 
 .for-sunny {

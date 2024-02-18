@@ -47,10 +47,10 @@ function App() {
             setError("Can't find that city");
           }
           const data = await res.json();
-          console.log(data.forecast);
           setForecastInfo(data.forecast);
         } catch (err) {
           if (err.name !== "AbortError") setError(err.message);
+          console.log(err.name);
         } finally {
           setLoading(false);
         }
@@ -89,6 +89,7 @@ function App() {
 
       {activeIndex === null ? (
         <WeatherList
+          handlers={handlers}
           start={start}
           end={end}
           forecastInfo={forecastInfo}
@@ -102,6 +103,7 @@ function App() {
       )}
       {activeIndex === null && !loading && !error && forecastInfo && (
         <ScrolleButtons
+          handlers={handlers}
           end={end}
           HandleDaysCountPlus={HandleDaysCountPlus}
           HandleDaysCountMinus={HandleDaysCountMinus}

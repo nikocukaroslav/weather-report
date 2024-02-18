@@ -1,10 +1,20 @@
 import { WeatherBox } from "./WeatherBox";
 
-export function WeatherList({ forecastInfo, setActiveIndex, start, end }) {
+export function WeatherList({
+  forecastInfo,
+  setActiveIndex,
+  start,
+  end,
+  handlers,
+}) {
   return forecastInfo && forecastInfo.forecastday
     ? forecastInfo.forecastday.slice(start, end).map((day, index) => {
         return (
-          <div key={index} onClick={() => setActiveIndex(index + start)}>
+          <div
+            key={index}
+            onClick={() => setActiveIndex(index + start)}
+            {...handlers}
+          >
             <WeatherBox
               key={index}
               day={day.date}
