@@ -47,14 +47,10 @@ function App() {
         } catch (err) {
           if (err.name === "AbortError") setLoading(true);
           if (err.name === "TypeError") {
-            setError("We can't find that city...");
+            setError("Can't find that city");
           } else setLoading(true);
         } finally {
           setLoading(false);
-        }
-        if (city.length < 3) {
-          setError("Choose city to see info →");
-          return;
         }
       }
 
@@ -76,7 +72,7 @@ function App() {
 
   return (
     <div className="weather-box-container">
-      {activeIndex === null && (
+      {activeIndex === null && !loading && !error && (
         <ScrolleButtons
           end={end}
           HandleDaysCountPlus={HandleDaysCountPlus}
@@ -89,6 +85,8 @@ function App() {
         {activeIndex !== null && <BackButton setActiveIndex={setActiveIndex} />}
         {activeIndex === null && <Input setCity={setCity} city={city} />}
       </div>
+      {!forecastInfo && <WeatherBoxPlaceHolder />}
+
       {activeIndex === null ? (
         <WeatherList
           start={start}
@@ -104,6 +102,10 @@ function App() {
       )}
     </div>
   );
+}
+
+function WeatherBoxPlaceHolder() {
+  return <div className="placeholder"></div>;
 }
 
 export default App;

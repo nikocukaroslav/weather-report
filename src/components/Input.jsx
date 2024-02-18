@@ -1,7 +1,7 @@
 export function Input({ setCity, city }) {
   return (
     <div className="choose-city">
-      <label>Choose your city</label>
+      <label>Your city:</label>
       <input
         type="text"
         className="choose-city-input"

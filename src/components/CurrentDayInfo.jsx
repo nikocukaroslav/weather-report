@@ -10,7 +10,7 @@ export function CurrentDayInfo({
   return (
     <main className="weather-box">
       <h2 className="day-time">{dayTime}</h2>
-      <section className="weather-info">
+      <div className="weather-info">
         <div className="weather-icon-container">
           <img src={icon} alt="weather-icon" className="weather-icon" />
           <div>
@@ -68,7 +68,7 @@ export function CurrentDayInfo({
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

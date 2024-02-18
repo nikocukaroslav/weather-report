@@ -25,7 +25,7 @@ export function WeatherBox({
     if (weekDay === "Thu") return "Thursday";
     if (weekDay === "Fri") return "Friday";
   }
-  console.log(calendarDay);
+  /* console.log(weather);*/
   return (
     <main className="weather-box">
       <h2 className="day-time">
@@ -47,7 +47,7 @@ export function WeatherBox({
           ? GetDay(7)
           : null}
       </h2>
-      <section className="weather-info">
+      <div className="weather-info">
         <div className="weather-icon-container">
           <img src={icon} alt="weather-icon" className="weather-icon" />
 
@@ -60,7 +60,7 @@ export function WeatherBox({
         </div>
         <div className="weather-info-list">
           <div className="temperature-box-container">
-            <div className="temperature-box">
+            <div className="temperature-box padding-right">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ export function WeatherBox({
               <span>{maxTemp_c}°C</span>
             </div>
 
-            <div className="temperature-box">
+            <div className="temperature-box padding-right">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ export function WeatherBox({
                   <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5" />
                 </svg>
               </span>
-              <span> {windSpeed} mph</span>
+              <span> {windSpeed} mh</span>
             </div>
             <div className="temperature-box margin-left">
               <span>
@@ -120,7 +120,7 @@ export function WeatherBox({
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
