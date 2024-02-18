@@ -46,7 +46,7 @@ function App() {
           console.log(data.forecast);
           setForecastInfo(data.forecast);
         } catch (err) {
-          if (err.name === "AbortError") setLoading(true);
+          if (err.name === "AbortError");
           if (err.name === "TypeError") {
             setError("Can't find that city");
           } else setLoading(true);
@@ -70,6 +70,7 @@ function App() {
     },
     [city]
   );
+
   return (
     <div className="weather-box-container">
       {activeIndex === null && !loading && !error && (
