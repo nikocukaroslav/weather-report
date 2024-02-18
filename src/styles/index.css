@@ -293,6 +293,7 @@ svg {
 
   .weather-box-container {
     grid-template-columns: unset;
+    margin-top: -12rem;
   }
 
   .weather-box {
