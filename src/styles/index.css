@@ -83,7 +83,6 @@ body::before {
   padding: 2.4rem;
   display: grid;
   gap: 2.4rem;
-  justify-content: center;
   position: relative;
   margin-top: -8.4rem;
 }
@@ -369,6 +368,15 @@ svg {
 }
 
 @media screen and (max-width: 577px) {
+  .weather-box-container-list {
+    grid-template-columns: unset;
+  }
+
+  .weather-box-container {
+    grid-template-columns: unset;
+    margin-top: -18rem;
+  }
+
   .for-cloudy {
     background-image: linear-gradient(
       to top right,
@@ -412,15 +420,6 @@ svg {
     font-size: 3.2rem;
     width: 24rem;
     height: 6rem;
-  }
-
-  .weather-box-container-list {
-    grid-template-columns: unset;
-  }
-
-  .weather-box-container {
-    grid-template-columns: unset;
-    margin-top: -18rem;
   }
 
   .weather-box:hover {

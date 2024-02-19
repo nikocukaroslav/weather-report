@@ -19,20 +19,25 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(3);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const debounceRef = useRef(null);
 
   function HandleDaysCountPlus() {
-    if (end < 8) {
+    if (end < 8 && !isButtonDisabled) {
+      setIsButtonDisabled(true);
       setStart((s) => s + 1);
       setEnd((e) => e + 1);
+      setTimeout(() => setIsButtonDisabled(false), 400);
     }
   }
 
   function HandleDaysCountMinus() {
-    if (start > 0) {
+    if (start > 0 && !isButtonDisabled) {
+      setIsButtonDisabled(true);
       setStart((s) => s - 1);
       setEnd((e) => e - 1);
+      setTimeout(() => setIsButtonDisabled(false), 400);
     }
   }
 
@@ -78,11 +83,13 @@ function App() {
   const handlers = useSwipeable({
     onSwipedUp: HandleDaysCountPlus,
     onSwipedDown: HandleDaysCountMinus,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
   });
 
   return (
     <Fade delay={1 * 100}>
-      <div className="weather-box-container" {...handlers}>
+      <div className="weather-box-container">
         <div className="navigation">
           {error ? <Error error={error} /> : null}
           {loading && !error ? <Loading /> : null}
@@ -94,17 +101,21 @@ function App() {
         {!forecastInfo && <WeatherBoxPlaceHolder />}
 
         {activeIndex === null ? (
-          <WeatherList
-            start={start}
-            end={end}
-            forecastInfo={forecastInfo}
-            setActiveIndex={setActiveIndex}
-          />
+          <div {...handlers}>
+            <WeatherList
+              start={start}
+              end={end}
+              forecastInfo={forecastInfo}
+              setActiveIndex={setActiveIndex}
+            />
+          </div>
         ) : (
-          <CurrentDayInfoList
-            forecastInfo={forecastInfo}
-            activeIndex={activeIndex}
-          />
+          <div className="weather-box-container-list">
+            <CurrentDayInfoList
+              forecastInfo={forecastInfo}
+              activeIndex={activeIndex}
+            />
+          </div>
         )}
         {activeIndex === null && !loading && !error && forecastInfo && (
           <ScrolleButtons
