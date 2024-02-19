@@ -35,7 +35,7 @@
   --gradient-body-2: #b197fc;
   --gradient-box-1: #5f3dc4;
   --gradient-box-2: #7048e8;
-  --main-filter: grayscale(100%);
+  --main-filter: blur(5px);
   --opacity: 80%;
 }
 * {
