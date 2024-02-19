@@ -370,7 +370,7 @@ svg {
 @media screen and (max-width: 577px) {
   .placeholder {
     width: 65rem;
-    height: 95rem;
+    height: 94.8rem;
   }
 
   .weather-box-container-list {
