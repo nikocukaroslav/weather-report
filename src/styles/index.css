@@ -31,10 +31,10 @@
   --second-color: #6741d9;
   --third-color: #d0bfff;
   --text-color: #e5dbff;
-  --gradient-body-1: #d0bfff;
-  --gradient-body-2: #e5dbff;
-  --gradient-box-1: #6741d9;
-  --gradient-box-2: #7858d9;
+  --gradient-body-1: #9775fa;
+  --gradient-body-2: #b197fc;
+  --gradient-box-1: #5f3dc4;
+  --gradient-box-2: #7048e8;
   --opacity: 80%;
 }
 * {
@@ -75,7 +75,6 @@ body::before {
   background-blend-mode: multiply;
   background-size: cover;
   filter: blur(5px) var(--main-filter);
-
   z-index: -1;
 }
 
@@ -275,24 +274,29 @@ svg {
   margin-left: auto;
 }
 
+.theme-icon {
+  width: 3.6rem;
+  height: auto;
+}
+
 .color-theme {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
-  top: 105%;
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  border: 3px solid var(--second-color);
+  gap: 2.4rem;
   border-radius: 6px;
   padding: 1.2rem;
+  border: 3px solid var(--second-color);
   background-color: var(--gradient-box-2);
 }
 
 .color-circles {
   list-style: none;
   display: flex;
+  flex-direction: column;
   gap: 1.2rem;
 }
 
@@ -446,6 +450,16 @@ svg {
 
   .temperature-box-container {
     height: 100%;
+  }
+
+  .theme-icon {
+    width: 4.4rem;
+    height: 4.4rem;
+  }
+
+  .color-circle {
+    width: 4.4rem;
+    height: 4.4rem;
   }
 }
 
