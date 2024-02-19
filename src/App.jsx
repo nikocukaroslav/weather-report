@@ -9,6 +9,7 @@ import { ScrolleButtons } from "./components/ScrolleButtons";
 import { useSwipeable } from "react-swipeable";
 import { WeatherBoxPlaceHolder } from "./components/WeatherBoxPlaceHolder";
 import { ChooseTheme } from "./components/ChooseTheme";
+import { Fade } from "react-awesome-reveal";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState(null);
@@ -80,37 +81,41 @@ function App() {
   });
 
   return (
-    <div className="weather-box-container" {...handlers}>
-      <div className="navigation">
-        {error ? <Error error={error} /> : null}
-        {loading && !error ? <Loading /> : null}
-        {activeIndex !== null && <BackButton setActiveIndex={setActiveIndex} />}
-        {activeIndex === null && <Input setCity={setCity} city={city} />}
-      </div>
-      {!forecastInfo && <WeatherBoxPlaceHolder />}
+    <Fade delay={1 * 100}>
+      <div className="weather-box-container" {...handlers}>
+        <div className="navigation">
+          {error ? <Error error={error} /> : null}
+          {loading && !error ? <Loading /> : null}
+          {activeIndex !== null && (
+            <BackButton setActiveIndex={setActiveIndex} />
+          )}
+          {activeIndex === null && <Input setCity={setCity} city={city} />}
+        </div>
+        {!forecastInfo && <WeatherBoxPlaceHolder />}
 
-      {activeIndex === null ? (
-        <WeatherList
-          start={start}
-          end={end}
-          forecastInfo={forecastInfo}
-          setActiveIndex={setActiveIndex}
-        />
-      ) : (
-        <CurrentDayInfoList
-          forecastInfo={forecastInfo}
-          activeIndex={activeIndex}
-        />
-      )}
-      {activeIndex === null && !loading && !error && forecastInfo && (
-        <ScrolleButtons
-          end={end}
-          HandleDaysCountPlus={HandleDaysCountPlus}
-          HandleDaysCountMinus={HandleDaysCountMinus}
-        />
-      )}
-      <ChooseTheme />
-    </div>
+        {activeIndex === null ? (
+          <WeatherList
+            start={start}
+            end={end}
+            forecastInfo={forecastInfo}
+            setActiveIndex={setActiveIndex}
+          />
+        ) : (
+          <CurrentDayInfoList
+            forecastInfo={forecastInfo}
+            activeIndex={activeIndex}
+          />
+        )}
+        {activeIndex === null && !loading && !error && forecastInfo && (
+          <ScrolleButtons
+            end={end}
+            HandleDaysCountPlus={HandleDaysCountPlus}
+            HandleDaysCountMinus={HandleDaysCountMinus}
+          />
+        )}
+        <ChooseTheme />
+      </div>
+    </Fade>
   );
 }
 
