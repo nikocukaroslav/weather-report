@@ -277,17 +277,16 @@ svg {
 
 .theme-icon {
   width: 3.6rem;
-  height: auto;
+  height: 3.6rem;
 }
 
 .color-theme {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: 1.5rem;
+  left: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.4rem;
   border-radius: 6px;
   padding: 1.2rem;
   border: 3px solid var(--second-color);
@@ -310,12 +309,28 @@ svg {
   border: 1px solid #ddd;
 }
 
+.margin-top {
+  margin-top: 2.4rem;
+}
+
+.dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.dropdown-menu.open {
+  max-height: 18rem;
+}
+
 .purple-theme {
   background-color: #7048e8;
 }
+
 .blue-theme {
   background-color: #1c7ed6;
 }
+
 .gray-theme {
   background-color: #989fa5;
 }
@@ -455,7 +470,7 @@ svg {
 
   .theme-icon {
     width: 5.6rem;
-    height: auto;
+    height: 5.6rem;
   }
 
   .color-circle {
