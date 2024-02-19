@@ -25,7 +25,6 @@ export function WeatherBox({
     if (weekDay === "Thu") return "Thursday";
     if (weekDay === "Fri") return "Friday";
   }
-  /* console.log(weather);*/
   return (
     <main className="weather-box">
       <h2 className="day-time">
