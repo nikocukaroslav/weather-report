@@ -35,6 +35,7 @@
   --gradient-body-2: #b197fc;
   --gradient-box-1: #5f3dc4;
   --gradient-box-2: #7048e8;
+  --main-filter: grayscale(100%);
   --opacity: 80%;
 }
 * {
@@ -281,8 +282,8 @@ svg {
 
 .color-theme {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  top: 2rem;
+  left: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -453,13 +454,13 @@ svg {
   }
 
   .theme-icon {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 5.6rem;
+    height: auto;
   }
 
   .color-circle {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 5.6rem;
+    height: auto;
   }
 }
 
