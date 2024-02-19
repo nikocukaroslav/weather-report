@@ -28,7 +28,7 @@ function App() {
       setIsButtonDisabled(true);
       setStart((s) => s + 1);
       setEnd((e) => e + 1);
-      setTimeout(() => setIsButtonDisabled(false), 300);
+      setTimeout(() => setIsButtonDisabled(false), 350);
     }
   }
 
@@ -37,7 +37,7 @@ function App() {
       setIsButtonDisabled(true);
       setStart((s) => s - 1);
       setEnd((e) => e - 1);
-      setTimeout(() => setIsButtonDisabled(false), 300);
+      setTimeout(() => setIsButtonDisabled(false), 350);
     }
   }
 
