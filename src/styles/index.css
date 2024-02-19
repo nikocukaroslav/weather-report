@@ -95,8 +95,8 @@ body::before {
 }
 
 .placeholder {
-  width: 85rem;
-  height: 562px;
+  width: 94.8rem;
+  height: 50rem;
 }
 
 .weather-box {
@@ -368,6 +368,11 @@ svg {
 }
 
 @media screen and (max-width: 577px) {
+  .placeholder {
+    width: 65rem;
+    height: 95rem;
+  }
+
   .weather-box-container-list {
     grid-template-columns: unset;
   }
@@ -403,11 +408,6 @@ svg {
 
   .scroll-button-plus {
     margin-top: auto;
-  }
-
-  .placeholder {
-    width: 65rem;
-    height: 95rem;
   }
 
   .button {

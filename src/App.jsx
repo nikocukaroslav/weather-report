@@ -98,10 +98,9 @@ function App() {
           )}
           {activeIndex === null && <Input setCity={setCity} city={city} />}
         </div>
-        {!forecastInfo && <WeatherBoxPlaceHolder />}
-
         {activeIndex === null ? (
           <div {...handlers}>
+            {!forecastInfo && <WeatherBoxPlaceHolder />}
             <WeatherList
               start={start}
               end={end}
