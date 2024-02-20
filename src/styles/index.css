@@ -145,7 +145,7 @@ body::before {
 }
 
 .day-time {
-  letter-spacing: 1.2px;
+  letter-spacing: 0.1rem;
 }
 
 .weather-icon {
@@ -170,7 +170,6 @@ body::before {
   font-size: 2.4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   row-gap: 3.6rem;
 }
 
