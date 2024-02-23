@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { WeatherList } from "./components/WeatherList";
-import { CurrentDayInfoList } from "./components/CurrentDayInfoList";
-import { BackButton } from "./components/BackButton";
-import { Input } from "./components/Input";
-import { Loading } from "./components/Loading";
-import { Error } from "./components/Error";
-import { ScrolleButtons } from "./components/ScrolleButtons";
+import { WeatherList } from "./WeatherList";
+import { CurrentDayInfoList } from "./CurrentDayInfoList";
+import { BackButton } from "./BackButton";
+import { Input } from "./Input";
+import { Loading } from "./Loading";
+import { Error } from "./Error";
+import { ScrolleButtons } from "./ScrolleButtons";
 import { useSwipeable } from "react-swipeable";
-import { WeatherBoxPlaceHolder } from "./components/WeatherBoxPlaceHolder";
-import { ChooseTheme } from "./components/ChooseTheme";
+import { WeatherBoxPlaceHolder } from "./WeatherBoxPlaceHolder";
+import { ChooseTheme } from "./ChooseTheme";
 import { Fade } from "react-awesome-reveal";
 
 function App() {

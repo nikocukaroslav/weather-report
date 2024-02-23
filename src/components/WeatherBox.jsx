@@ -25,24 +25,38 @@ export function WeatherBox({
     if (weekDay === "Thu") return "Thursday";
     if (weekDay === "Fri") return "Friday";
   }
+
+  const lastDayOfMonth = new Date(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    0
+  ).getDate();
+
   return (
     <main className="weather-box">
       <h2 className="day-time">
         {currentDay === calendarDay
           ? "Today"
-          : calendarDay === currentDay + 1
+          : calendarDay === currentDay + 1 ||
+            calendarDay === currentDay + 1 - lastDayOfMonth
           ? GetDay(1)
-          : calendarDay === currentDay + 2
+          : calendarDay === currentDay + 2 ||
+            calendarDay === currentDay + 2 - lastDayOfMonth
           ? GetDay(2)
-          : calendarDay === currentDay + 3
+          : calendarDay === currentDay + 3 ||
+            calendarDay === currentDay + 3 - lastDayOfMonth
           ? GetDay(3)
-          : calendarDay === currentDay + 4
+          : calendarDay === currentDay + 4 ||
+            calendarDay === currentDay + 4 - lastDayOfMonth
           ? GetDay(4)
-          : calendarDay === currentDay + 5
+          : calendarDay === currentDay + 5 ||
+            calendarDay === currentDay + 5 - lastDayOfMonth
           ? GetDay(5)
-          : calendarDay === currentDay + 6
+          : calendarDay === currentDay + 6 ||
+            calendarDay === currentDay + 6 - lastDayOfMonth
           ? GetDay(6)
-          : calendarDay === currentDay + 7
+          : calendarDay === currentDay + 7 ||
+            calendarDay === currentDay + 7 - lastDayOfMonth
           ? GetDay(7)
           : null}
       </h2>
