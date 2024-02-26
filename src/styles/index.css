@@ -486,10 +486,6 @@ svg {
 }
 
 @media screen and (max-width: 440px) {
-  html {
-    font-size: 29%;
-  }
-
   .button {
     font-size: 3.8rem;
   }
@@ -502,7 +498,10 @@ svg {
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 390px) {
+  html {
+    font-size: 29%;
+  }
   .width-plus {
     width: 120%;
   }
@@ -538,9 +537,9 @@ svg {
   transition: opacity 500ms, transform 500ms;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 370px) {
   html {
-    font-size: 25%;
+    font-size: 26%;
   }
 }
 
