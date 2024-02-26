@@ -48,7 +48,7 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=6436fb77fd4942f8ae0154343242602&q=${city}&aqi=no&days=8`,
+            `http://api.weatherapi.com/v1/forecast.json?key=6436fb77fd4942f8ae0154343242602&q=${city}&aqi=no&days=3`,
             { signal: controller.signal }
           );
           if (!res.ok) {
@@ -87,12 +87,14 @@ function App() {
     clearTimeout(debounceRef.current);
   }
 
-  const handlers = useSwipeable({
-    onSwipedUp: HandleDaysCountPlus,
-    onSwipedDown: HandleDaysCountMinus,
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
+  const handlers = useSwipeable(
+    forecastInfo?.forecastday?.length > 3 && {
+      onSwipedUp: HandleDaysCountPlus,
+      onSwipedDown: HandleDaysCountMinus,
+      preventDefaultTouchmoveEvent: true,
+      trackMouse: true,
+    }
+  );
 
   return (
     <Fade delay={1 * 100}>
@@ -123,13 +125,17 @@ function App() {
             />
           </div>
         )}
-        {activeIndex === null && !loading && !error && forecastInfo && (
-          <ScrolleButtons
-            end={end}
-            HandleDaysCountPlus={HandleDaysCountPlus}
-            HandleDaysCountMinus={HandleDaysCountMinus}
-          />
-        )}
+        {activeIndex === null &&
+          !loading &&
+          !error &&
+          forecastInfo &&
+          forecastInfo.forecastday.length > 3 && (
+            <ScrolleButtons
+              end={end}
+              HandleDaysCountPlus={HandleDaysCountPlus}
+              HandleDaysCountMinus={HandleDaysCountMinus}
+            />
+          )}
         <ChooseTheme />
       </div>
     </Fade>
