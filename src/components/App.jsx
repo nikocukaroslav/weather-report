@@ -48,7 +48,7 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=f38c6a4ab8c24e0aa8a144634241202&q=${city}&aqi=no&days=8`,
+            `http://api.weatherapi.com/v1/forecast.json?key=6436fb77fd4942f8ae0154343242602&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
           if (!res.ok) {
@@ -62,12 +62,8 @@ function App() {
         } finally {
           setLoading(false);
         }
+        localStorage.setItem("city", city);
       }
-
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-
       debounceRef.current = setTimeout(() => {
         weather();
         setError("");
@@ -79,6 +75,17 @@ function App() {
     },
     [city]
   );
+
+  useEffect(function () {
+    const savedCity = localStorage.getItem("city");
+    if (savedCity) {
+      setCity(savedCity);
+    }
+  }, []);
+
+  if (debounceRef.current) {
+    clearTimeout(debounceRef.current);
+  }
 
   const handlers = useSwipeable({
     onSwipedUp: HandleDaysCountPlus,
