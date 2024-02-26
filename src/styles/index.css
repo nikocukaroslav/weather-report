@@ -549,3 +549,9 @@ svg {
     font-size: 42.5%;
   }
 }
+
+@media screen and (max-height: 750px) {
+  html {
+    font-size: 50%;
+  }
+}
