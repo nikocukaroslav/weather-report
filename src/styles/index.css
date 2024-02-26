@@ -503,9 +503,6 @@ svg {
 }
 
 @media screen and (max-width: 380px) {
-  html {
-    font-size: 25%;
-  }
   .width-plus {
     width: 120%;
   }
@@ -539,6 +536,12 @@ svg {
   opacity: 0;
   transform: translateX(-20px);
   transition: opacity 500ms, transform 500ms;
+}
+
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 25%;
+  }
 }
 
 @media screen and (max-height: 600px) and (min-width: 1200px) {
