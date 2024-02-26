@@ -544,13 +544,13 @@ svg {
   transition: opacity 500ms, transform 500ms;
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 600px) and (max-width: 1500px) {
   html {
     font-size: 42.5%;
   }
 }
 
-@media screen and (max-height: 750px) {
+@media screen and (max-height: 750px) and (max-width: 1500px) {
   html {
     font-size: 50%;
   }
