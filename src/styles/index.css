@@ -495,7 +495,7 @@ svg {
   }
 
   .temperature-box-container {
-    column-gap: 1rem;
+    column-gap: 0.5rem;
   }
   .weather-icon-container {
     gap: 0;
