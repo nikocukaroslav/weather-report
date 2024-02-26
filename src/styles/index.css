@@ -543,3 +543,9 @@ svg {
   transform: translateX(-20px);
   transition: opacity 500ms, transform 500ms;
 }
+
+@media screen and (max-height: 600px) {
+  html {
+    font-size: 42.5%;
+  }
+}
