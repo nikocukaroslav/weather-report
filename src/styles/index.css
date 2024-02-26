@@ -347,13 +347,7 @@ svg {
 
 @media screen and (max-width: 1015px) {
   html {
-    font-size: 44.5%;
-  }
-}
-
-@media screen and (max-width: 884px) {
-  html {
-    font-size: 36.5%;
+    font-size: 33.5%;
   }
   .scrolle-buttons {
     width: 108%;
@@ -362,11 +356,11 @@ svg {
 
 @media screen and (max-width: 727px) {
   html {
-    font-size: 32.5%;
+    font-size: 31%;
   }
 }
 
-@media screen and (max-width: 577px) {
+@media screen and (max-width: 604px) {
   .placeholder {
     width: 65rem;
     height: 94.8rem;
@@ -544,13 +538,13 @@ svg {
   transition: opacity 500ms, transform 500ms;
 }
 
-@media screen and (max-height: 600px) and (min-width: 577px) {
+@media screen and (max-height: 600px) and (min-width: 1200px) {
   html {
     font-size: 42.5%;
   }
 }
 
-@media screen and (max-height: 750px) and (min-width: 577px) {
+@media screen and (max-height: 750px) and (min-width: 1200px) {
   html {
     font-size: 50%;
   }
