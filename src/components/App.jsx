@@ -48,7 +48,7 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=6436fb77fd4942f8ae0154343242602&q=${city}&aqi=no&days=8`,
+            `http://api.weatherapi.com/v1/forecast.json?key=b5e65fbd3c094a9395a122725241103&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
           if (!res.ok) {

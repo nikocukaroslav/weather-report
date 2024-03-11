@@ -38,6 +38,7 @@
   --main-filter: blur(5px);
   --opacity: 80%;
 }
+
 * {
   margin: 0;
   padding: 0;
