@@ -23,6 +23,8 @@ function App() {
 
   const debounceRef = useRef(null);
 
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
   function HandleDaysCountPlus() {
     if (end < 8 && !isButtonDisabled) {
       setIsButtonDisabled(true);
@@ -48,7 +50,7 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=b5e65fbd3c094a9395a122725241103&q=${city}&aqi=no&days=8`,
+            `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
           if (!res.ok) {
