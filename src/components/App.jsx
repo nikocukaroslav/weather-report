@@ -25,7 +25,7 @@ function App() {
 
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-  function HandleDaysCountPlus() {
+  function handleDaysCountPlus() {
     if (end < 8 && !isButtonDisabled) {
       setIsButtonDisabled(true);
       setStart((s) => s + 1);
@@ -34,7 +34,7 @@ function App() {
     }
   }
 
-  function HandleDaysCountMinus() {
+  function handleDaysCountMinus() {
     if (start > 0 && !isButtonDisabled) {
       setIsButtonDisabled(true);
       setStart((s) => s - 1);
@@ -100,8 +100,8 @@ function App() {
 
   const handlers = useSwipeable(
     forecastInfo?.forecastday?.length > 3 && {
-      onSwipedUp: HandleDaysCountPlus,
-      onSwipedDown: HandleDaysCountMinus,
+      onSwipedUp: handleDaysCountPlus,
+      onSwipedDown: handleDaysCountMinus,
       preventDefaultTouchmoveEvent: true,
       trackMouse: true,
     }
@@ -143,8 +143,8 @@ function App() {
           forecastInfo.forecastday.length > 3 && (
             <ScrolleButtons
               end={end}
-              HandleDaysCountPlus={HandleDaysCountPlus}
-              HandleDaysCountMinus={HandleDaysCountMinus}
+              HandleDaysCountPlus={handleDaysCountPlus}
+              HandleDaysCountMinus={handleDaysCountMinus}
             />
           )}
         <ChooseTheme />
