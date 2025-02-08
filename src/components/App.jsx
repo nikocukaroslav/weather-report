@@ -66,10 +66,19 @@ function App() {
         }
         localStorage.setItem("city", city);
       }
-      debounceRef.current = setTimeout(() => {
-        weather();
-        setError("");
-      }, 500);
+
+      useEffect(() => {
+        const controller = new AbortController();
+        const debounceId = setTimeout(() => {
+          weather();
+          setError("");
+        }, 500);
+
+        return () => {
+          clearTimeout(debounceId);
+          controller.abort();
+        };
+      }, [city]);
 
       return function () {
         controller.abort();
