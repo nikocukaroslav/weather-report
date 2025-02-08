@@ -23,7 +23,9 @@ function App() {
 
   const debounceRef = useRef(null);
 
-  function HandleDaysCountPlus() {
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
+  function handleDaysCountPlus() {
     if (end < 8 && !isButtonDisabled) {
       setIsButtonDisabled(true);
       setStart((s) => s + 1);
@@ -32,7 +34,7 @@ function App() {
     }
   }
 
-  function HandleDaysCountMinus() {
+  function handleDaysCountMinus() {
     if (start > 0 && !isButtonDisabled) {
       setIsButtonDisabled(true);
       setStart((s) => s - 1);
@@ -48,7 +50,7 @@ function App() {
         try {
           setLoading(true);
           const res = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=b5e65fbd3c094a9395a122725241103&q=${city}&aqi=no&days=8`,
+            `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no&days=8`,
             { signal: controller.signal }
           );
           if (!res.ok) {
@@ -64,10 +66,19 @@ function App() {
         }
         localStorage.setItem("city", city);
       }
-      debounceRef.current = setTimeout(() => {
-        weather();
-        setError("");
-      }, 500);
+
+      useEffect(() => {
+        const controller = new AbortController();
+        const debounceId = setTimeout(() => {
+          weather();
+          setError("");
+        }, 500);
+
+        return () => {
+          clearTimeout(debounceId);
+          controller.abort();
+        };
+      }, [city]);
 
       return function () {
         controller.abort();
@@ -89,8 +100,8 @@ function App() {
 
   const handlers = useSwipeable(
     forecastInfo?.forecastday?.length > 3 && {
-      onSwipedUp: HandleDaysCountPlus,
-      onSwipedDown: HandleDaysCountMinus,
+      onSwipedUp: handleDaysCountPlus,
+      onSwipedDown: handleDaysCountMinus,
       preventDefaultTouchmoveEvent: true,
       trackMouse: true,
     }
@@ -132,8 +143,8 @@ function App() {
           forecastInfo.forecastday.length > 3 && (
             <ScrolleButtons
               end={end}
-              HandleDaysCountPlus={HandleDaysCountPlus}
-              HandleDaysCountMinus={HandleDaysCountMinus}
+              HandleDaysCountPlus={handleDaysCountPlus}
+              HandleDaysCountMinus={handleDaysCountMinus}
             />
           )}
         <ChooseTheme />
